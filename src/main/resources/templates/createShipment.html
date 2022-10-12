@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Shipment</title>
+       <script>
+       function numbersonly(e){
+    	    var unicode=e.charCode? e.charCode : e.keyCode
+    	    if (unicode!=8){ //if the key isn't the backspace key (which we should allow)
+    	        if (unicode<48||unicode>57) //if not a number
+    	        alert("Please Enter only Numbers");
+    	            return false //disable key press
+    	    }
+    	}
+            </script>
+  <style>
+    body{ font-family:sans-serif;
+        background-color:rgb(1 191 249);}
+    form{width:fit-content;margin:auto;
+      background-color:lightblue;
+      padding:5%;font-weight:bold;font-family:sans-serif;}
+
+      table{border-spacing:10px}
+
+      input, textarea{width:200px;font-family:sans-serif;}
+      input[type="submit"]{width:auto;background-color:#111114;color:white;font-weight:bold;border:none;padding:1%;
+      border-radius:5px;display:block;margin:auto;}
+       #error{color:red;font-size:100%;}
+       #success{color:green;font-size:100%;}
+
+  </style>
+    <link rel="stylesheet" th:href="@{/stylesheet.css}">
+ 
+    
+</head>
+<body>
+<br>
+<a class="page-link" th:href="@{dashboard}">Dashboard</a>
+<br><br>
+<form method="post" action="#" th:object="${shipment}" th:action="@{createShipment}">
+<h3 style="font-size:18px;text-align:center">Create New Shipment</h3>
+    <div id="error" th:text="${error}"></div>
+    <div id="success" th:text="${success}"></div>
+    <table>
+        <tr><td>Shipment/Invoice number</td>
+            <td>: <input type="number" placeholder="Shipment/Invoice number"
+            name="shipment_Number" th:field="*{shipment_Number}" style=" padding: 2px;" onkeypress="return numbersonly(event)"/></td>
+        </tr>
+        <tr><td>Container Number</td>
+            <td>: <input type="number" placeholder="Container Number" name="container_no"
+            th:field="*{container_no}" style=" padding: 2px;" onkeypress="return numbersonly(event)"/></td></tr>
+        <tr><td>Shipment Description</td><td>: <textarea name="desc" th:field="*{desc}" placeholder="Enter your description" style=" padding: 2px;"></textarea></td></tr>
+        <tr><td>Route Details</td><td>: <select name="route" th:field="*{route}" style=" padding: 2px;width:95%;">
+           <option value="">--- Select Route ---</option>
+            <option value="Hyderabad - USA">Hyderabad - USA</option>
+            <option value="Bangalore - UK">Bangalore - UK</option>
+            <option value="Hyderabad - Bangalore">Hyderabad - Bangalore</option>
+        </select></td></tr>
+        <tr><td>Goods Type</td><td>: <select name="goods" th:field="*{goods}" style=" padding: 2px;width:95%;">
+            <option value="">--- Select Goods Type ---</option>
+            <option value="Pharma">Pharma</option>
+            <option value="Vaccines">Vaccines</option>
+            <option value="Fish">Fish</option>
+            <option value="Electronics">Electronics</option>
+        </select></td></tr>
+        <tr><td>Device</td><td>: <select name="device" th:field="*{device}" style=" padding: 2px;width:95%;">
+         <option value="">--- Select Device ---</option>
+            <option th:each="device : ${devices}" th:value="${device}" th:text="${device}"></option>
+        </select></td></tr>
+        <tr><td>Expected Delivery Date</td><td>: <input type="date" placeholder="Expected Delivery Date"
+        name="date" th:field="*{date}" style=" padding: 2px;"/></td></tr>
+        <tr><td>PO Number</td><td>: <input placeholder="PO Number" type="number"
+        name="po_no" th:field="*{po_no}" style=" padding: 2px;" onkeypress="return numbersonly(event)"/></td></tr>
+        <tr><td>Delivery Number</td><td>: <input placeholder="Delivery Number" type="number"
+                                         name="delivery_no" th:field="*{delivery_no}" style=" padding: 2px;" onkeypress="return numbersonly(event)"/></td></tr>
+        <tr><td>NDC Number</td><td>: <input placeholder="NDC Number" type="number"
+                                               name="ndc_no" th:field="*{ndc_no}" style=" padding: 2px;" onkeypress="return numbersonly(event)"/></td></tr>
+        <tr><td>Batch ID Number</td><td>: <input placeholder="Batch ID" type="number"
+                                          name="batch_id" th:field="*{batch_id}" style=" padding: 2px;" onkeypress="return numbersonly(event)"/></td></tr>
+        <tr><td>Serial Number of Goods</td><td>: <input placeholder="Serial Number of Goods" type="number"
+                                               name="serial_no" th:field="*{serial_no}" style=" padding: 2px;" onkeypress="return numbersonly(event)"/></td></tr>
+    </table>
+    <br>
+    <br>
+    <input type="submit" value="Create Shipment"  style=" padding: 6px;width: 50%; font-size: 16px;"/>
+</form>
+</body>
+</html>

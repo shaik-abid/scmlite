@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" th:href="@{/stylesheet.css}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+   /*      body{text-align:center;
+        font-family:sans-serif;
+        background-color:white;
+
+        } */
+
+        #header{color:white;
+        background-color:rgba(15, 22, 38, 1);
+        font-size:250%;text-align:left;
+        position:relative;
+        padding-right:1%;
+        }
+
+        #welcome::before{content:"Welcome ";color:white;}
+
+        #pages{width:225px;
+        padding-left:25px;
+        height:100%;
+         background-color:white;
+         position:absolute;top:0;left:0;
+         transform: translateX(-100%);
+         }
+         a{padding:1% !important;}
+
+         #side-nav-btn:hover{cursor:pointer;}
+
+         @keyframes shiftRight{from{margin-left: 0px} to{margin-left:250px}}
+         @keyframes slideRight{from{transform: translateX(-100%);} to{transform: translateX(0%);}}
+         .shift-right{
+            animation-name:shiftRight;
+            animation-duration:0.5s;
+            animation-fill-mode: forwards;
+         }
+         @keyframes shiftRightReverse{from{margin-left: 250px} to{margin-left:0px}}
+         .shift-right-reverse{
+            animation-name:shiftRightReverse;
+            animation-duration:0.5s;
+            animation-fill-mode: forwards;
+         }
+         .slide-right{
+             animation-name:slideRight;
+            animation-duration:0.5s;
+            animation-fill-mode: forwards;
+         }
+         @keyframes slideRightReverse{from{transform: translateX(0%);} to{transform: translateX(-100%);}}
+          .slide-right-reverse{
+             animation-name:slideRightReverse;
+            animation-duration:0.5s;
+            animation-fill-mode: forwards;
+         }
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 7px 16px;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.page-link {
+  background-color: #04AA6D;
+  color: white;
+}
+
+*{
+padding:0;
+margin:0;
+}
+body
+{
+
+ background-size:cover;
+ background-position:center;
+box-sizing:border-box;
+        font-family:sans-serif;
+        background-color:white;
+}
+.menu-bar{
+ background:rgb(0,100,0);
+ text-align:center;
+}
+.menu-bar ul{
+display:inline-flex;
+list-style:none;
+color:#fff;
+}
+.menu-bar ul li{
+width:120px;
+margin:15px;
+padding:5px;
+}
+.menu-bar ul li a{
+text-decoration:none;
+color:#fff;
+
+}
+.active, .menu-bar ul li:hover
+{
+ background:#2bab0d;
+ border-radius:3px;
+}
+.menu-bar .fa{
+margin-right:8px;
+}
+    </style>
+    <script>
+        let open = false;
+       function sideNav(){
+            var btn = document.getElementById("side-nav-btn");
+            var header = document.getElementById("header");
+            var sideNav = document.getElementById("pages");
+            if(!open){
+                open = true;
+                header.classList.replace("shift-right-reverse", "shift-right");
+                sideNav.classList.replace("slide-right-reverse", "slide-right");
+
+            }
+            else{
+                open = false;
+                header.classList.replace("shift-right", "shift-right-reverse");
+                sideNav.classList.replace("slide-right", "slide-right-reverse");
+            }
+
+        }
+    </script>
+</head>
+<body>
+<div id="header" class="shift-right-reverse" style="font-size: 30px;">
+    <!-- <span id="side-nav-btn" onclick="sideNav();">&#9776;</span> --> SCMLite
+
+    <span th:text="${user.username}" style="float:right;color:grey;font-size:60%;" id="welcome"></span>
+</div>
+
+<!-- <div id="pages" align="left" class="slide-right-reverse">
+    <br>
+    <br>
+    <br>
+    <br>
+    <a th:href="@{createShipment}" style="" class="page-link">Create Shipment</a>
+    <br>
+    <br>
+    <br>
+    <a th:href="@{devices}" style="" class="page-link">Devices Data Stream</a>
+    <br>
+    <br>
+    <br>
+<a th:href="@{logout}" class="page-link">Logout</a>
+</div> -->
+<!-- <div class="topnav">
+  <div><a th:href="@{createShipment}" style="" class="page-link">Create Shipment</a></div>
+  <div><a th:href="@{devices}" style="" class="page-link">Device Data Stream</a></div>
+  <div><a th:href="@{logout}" class="page-link">Logout</a></div>
+ 
+</div> -->
+
+<div class="menu-bar">
+<ul>
+<li class="active"><a th:href="@{createShipment}"><em class="fa fa-plus"></em>Create Shipment</a></li>
+<li><a th:href="@{devices}"><em class="fa fa-table"></em>Device Data Stream</a></li>
+<li><a href="#"><em class="fa fa-clone"></em>Services</a></li>
+<li><a href="#"><em class="fa fa-users"></em>Partners</a></li>
+<li><a href="#"><em class="fa fa-user"></em>About Us</a></li>
+<li><a href="#"><em class="fa fa-phone"></em>Contact</a></li>
+<li><a th:href="@{logout}"><em class="fa fa-sign-out"></em>Logout</a></li>
+</ul>
+</div>
+</body>
+</html>

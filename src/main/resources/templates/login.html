@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login to SCMLite!</title>
+
+  <script>
+       function onSubmit(token) {
+         document.getElementById("demo-form").submit();
+       }
+     </script>
+  <style>
+  body{background-color:rgb(1 191 249);}
+    form {background-color: rgb(242 243 247);
+        font-family:sans-serif;
+        font-size:300%;
+        width:fit-content;
+        margin:auto;
+        padding:5%;
+        position: relative;
+        top: 170px;
+        }
+
+        #error{color:red;font-size:20%;}
+
+    input {width:100%;}
+
+    a{font-size:25%;}
+    
+    input{
+    width:100%;
+  resize: none;
+  padding:15px;
+  border-radius:15px;
+  border:0;
+  box-shadow:4px 4px 10px rgba(0,0,0,0.06);
+  height:25px;
+}
+
+button{
+  width:103%;
+  resize: none;
+/*   padding:15px; */
+  border-radius:15px;
+  border:0;
+  box-shadow:4px 4px 10px rgba(0,0,0,0.06);
+  height:25px;
+  background-color:#28a745;
+  color:white;
+  font-weight:bold;
+
+    padding: 3px 36px;
+    font-size: 18px;
+   
+    border: none;
+   
+    outline: none;
+    cursor: pointer;
+}
+
+  </style>
+  <link rel="stylesheet" th:href="@{/stylesheet.css}">
+</head>
+<body>
+<br>
+<form method="post" action="#" th:object="${user}" th:action="@{login}" id="demo-form">
+   Login<br>
+    <div id="error" th:text="${error}"></div>
+  <input name="username" placeholder="Enter Username" th:field="*{username}" style=" padding: 3px;"/>
+  <br>
+  <input name="password" type="password" placeholder="Enter Password" th:field="*{password}" style=" padding: 3px;"/>
+  <br>
+ <!--  <button class="g-recaptcha" data-sitekey="6LfNIqUgAAAAACSL6oQkgrf9GX6px05J7OzIRtzY" data-callback='onSubmit'
+          style="background-color:#28a745;color:white;font-weight:bold;border-radius:25px;  width: 104%;
+    padding: 3px 36px;
+    font-size: 18px;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;">Submit</button> -->
+     <button class="g-recaptcha" data-sitekey="6LfNIqUgAAAAACSL6oQkgrf9GX6px05J7OzIRtzY" data-callback='onSubmit'
+          >Submit</button>
+ <br> <a href="../register">Don't have an account? Create account</a>
+</form>
+</body>
+</html>
